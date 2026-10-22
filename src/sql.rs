@@ -1,10 +1,12 @@
 use anyhow::Result;
 use turso::Builder;
 
-#[cfg(target_os = "linux")]
-const DB_PATH:&str = "/home/ray/MEGA/Rays/Programming/english/thesaurus.db";
-#[cfg(target_os = "windows")]
-const DB_PATH:&str = r"C:\Users\hrag\Sync\Programming\english\thesaurus.db";
+// #[cfg(target_os = "linux")]
+// const DB_PATH:&str = "/home/ray/MEGA/Rays/Programming/english/thesaurus.db";
+// #[cfg(target_os = "windows")]
+// const DB_PATH:&str = r"C:\Users\hrag\Sync\Programming\english\thesaurus.db";
+
+const DB_PATH:&str = r"thesaurus.db";
 
 #[derive(Debug, Clone)]
 pub struct Word {
