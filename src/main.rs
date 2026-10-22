@@ -50,7 +50,7 @@ impl App {
             Message::WordsReceived(Ok(words)) => {
                 self.version = self.version.wrapping_add(1);
                 self.selected_word = match words.first() {
-                    Some(word) => word.word,
+                    Some(word) => word.word.clone(),
                     None => String::new()
                 };
                 self.items = words;

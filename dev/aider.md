@@ -9,5 +9,6 @@ aider --edit-format diff --no-verify-ssl
 /add src/main.rs
 
 /run cargo check --message-format=short
+/run cargo check
 /run cargo build
 ```

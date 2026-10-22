@@ -22,12 +22,13 @@ pub struct WordShort {
 	pub word: String,
 }
 
-pub async fn get_words(search: &str) -> Result<Vec<String>> {
-	let mut rtn:Vec<String> = Vec::new();
+pub async fn get_words(search: &str) -> Result<Vec<WordShort>> {
+	let mut rtn:Vec<WordShort> = Vec::new();
 
     let sql = format!(r"
 SELECT
-w.word
+w.rid
+,w.word
 FROM words w
 WHERE w.word LIKE '{search}%'
 ;
@@ -38,9 +39,11 @@ WHERE w.word LIKE '{search}%'
 	let mut rows = conn.query(sql, ()).await?;
 	
     while let Some(row) = rows.next().await? {
-        let word = row.get_value(0)?;
+        let word_rid = row.get_value(0)?;
+		let word_rid = word_rid.as_integer().unwrap();
+        let word = row.get_value(1)?;
 		let word = word.as_text().unwrap().to_string();
-		rtn.push(word);
+		rtn.push(WordShort {word_rid: *word_rid, word: word});
     }
 
 	// println!("words: {:?}", rtn);
