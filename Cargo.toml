@@ -1,0 +1,10 @@
+[package]
+name = "dictionary"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1"
+iced = { version = "0.14", features = ["lazy"] }
+tokio = { version = "1", features = ["full"] }
+turso = "0.8"

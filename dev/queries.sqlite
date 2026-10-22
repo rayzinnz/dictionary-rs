@@ -1,0 +1,29 @@
+﻿-- sqlite3 /home/ray/MEGA/Rays/Programming/english/thesaurus.db
+-- sqlite3 C:\Users\hrag\Sync\Programming\english\thesaurus.db
+
+-- sqlite> .schema
+CREATE TABLE words
+(
+rid INTEGER PRIMARY KEY AUTOINCREMENT
+,word TEXT
+);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE INDEX idx_wsw ON words(word);
+CREATE TABLE wordlinks
+(
+rid INTEGER PRIMARY KEY AUTOINCREMENT
+,words_rid INT --source word
+,linktype INT --0 = synonym, 1 = antonym
+,word TEXT
+,linked_words_rid INT --linked word
+);
+CREATE TABLE definitions
+(
+rid INTEGER PRIMARY KEY AUTOINCREMENT
+,words_rid INT
+,definitiontype INT --0 = sense, 1 = subsense
+,definition TEXT
+);
+CREATE INDEX idx_defwordrid ON definitions(words_rid);
+CREATE INDEX idx_linkswordrid ON wordlinks(words_rid);
+
