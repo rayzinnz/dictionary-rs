@@ -1,5 +1,4 @@
-﻿-- sqlite3 /home/ray/MEGA/Rays/Programming/english/thesaurus.db
--- sqlite3 C:\Users\hrag\Sync\Programming\english\thesaurus.db
+﻿-- sqlite3 C:\Users\hrag\Sync\Programming\rust\dictionary\assets\thesaurus.db
 
 -- sqlite> .schema
 CREATE TABLE words
@@ -27,3 +26,45 @@ rid INTEGER PRIMARY KEY AUTOINCREMENT
 CREATE INDEX idx_defwordrid ON definitions(words_rid);
 CREATE INDEX idx_linkswordrid ON wordlinks(words_rid);
 
+------------------------
+
+SELECT *
+FROM words w
+-- WHERE w.rid = 109
+WHERE w.word = 'amicable'
+ORDER BY RANDOM()
+LIMIT 10;
+
+SELECT
+	wl.words_rid
+	,w.word
+	,wl.linktype
+	,wl.word
+FROM wordlinks wl
+	JOIN words w ON w.rid = wl.words_rid
+WHERE wl.words_rid=1853
+-- LIMIT 10
+;
+
+SELECT
+	wl.linktype
+	,wl.word
+FROM wordlinks wl
+WHERE wl.words_rid=10
+ORDER BY wl.rid ASC
+;
+
+SELECT
+	d.definitiontype
+	,d.definition
+FROM definitions d
+WHERE d.words_rid = 109
+ORDER BY d.rid ASC
+;
+
+SELECT
+	d.*
+FROM definitions d
+WHERE d.definitiontype = 1
+LIMIT 10
+;
